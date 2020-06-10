@@ -31,7 +31,6 @@ void spew(int count)
     dis.reset();
 
     run = dis(gen);
-    std::cout << run << std::endl;
 
     std::string curr;
 
@@ -40,6 +39,8 @@ void spew(int count)
         curr = p->first;
     }
 
+    std::cout << std::endl << std::endl;
+    
     while(--count)
     {
         //where should you go? very similar to above, but with fewer entries in the map
