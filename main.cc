@@ -4,7 +4,9 @@
 #include <string>
 #include <random>
 
-std::map<std::string, std::map<std::string, int>> model;
+#define std::map<std::string,std::map<std::string,int>> modeltype
+
+modeltype model;
 std::ifstream in;
 
 void countWords() 
@@ -34,7 +36,7 @@ void spew(int count)
 
     std::string curr;
 
-    for(std::map<std::string, std::map<std::string, int>>::iterator p = model.begin(); p != model.end() && run > 0; ++p, --run)
+    for(modeltype::iterator p = model.begin(); p != model.end() && run > 0; ++p, --run)
     {
         curr = p->first;
     }
@@ -78,7 +80,7 @@ int main(int argc, char** argv)
     countWords();
 
     //report results
-    for(std::map<std::string, std::map<std::string, int>>::iterator p = model.begin(); p != model.end(); ++p)
+    for(modeltype::iterator p = model.begin(); p != model.end(); ++p)
     {
         int total_count = 0;
 
