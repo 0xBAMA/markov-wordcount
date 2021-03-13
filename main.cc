@@ -5,6 +5,7 @@
 #include <random>
 
 #define std::map<std::string,std::map<std::string,int>> modeltype
+#define std::map<std::string,int>> modelentry
 
 modeltype model;
 std::ifstream in;
@@ -50,7 +51,7 @@ void spew(int count)
         where_to.clear();
 
         std::string temp = curr;
-        for(std::map<std::string,int>::iterator p = model[temp].begin(); p != model[temp].end(); p++)
+        for(modelentry::iterator p = model[temp].begin(); p != model[temp].end(); p++)
             for(int i = 0; i < p->second; i++)
                 where_to.push_back(p->first);
 
@@ -84,12 +85,12 @@ int main(int argc, char** argv)
     {
         int total_count = 0;
 
-        for(std::map<std::string, int>::iterator q = model[p->first].begin(); q!=model[p->first].end(); ++q)
+        for(modelentry::iterator q = model[p->first].begin(); q!=model[p->first].end(); ++q)
             ++total_count;
 
         std::cout << "\'"<< p->first << "\' has " << total_count << " occurrence(s)." << std::endl;
 
-        for(std::map<std::string, int>::iterator q = model[p->first].begin(); q!=model[p->first].end(); ++q)
+        for(modelentry::iterator q = model[p->first].begin(); q!=model[p->first].end(); ++q)
             std::cout << "  followed by: \'" << q->first << "\' " << q->second << " time(s)." << std::endl; 
     }
 
