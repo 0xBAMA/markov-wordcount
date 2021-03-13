@@ -5,7 +5,7 @@
 #include <random>
 
 #define std::map<std::string,std::map<std::string,int>> modeltype
-#define std::map<std::string,int>> modelentry
+#define std::map<std::string,int> modelentry
 
 modeltype model;
 std::ifstream in;
