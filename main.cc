@@ -83,8 +83,8 @@ int main(int argc, char** argv)
         int total_count = 0;
 
         for(std::map<std::string, int>::iterator q = model[p->first].begin(); q!=model[p->first].end(); ++q)
-            ++total_count;
-
+            total_count += q->second;
+        
         std::cout << "\'"<< p->first << "\' has " << total_count << " occurrence(s)." << std::endl;
 
         for(std::map<std::string, int>::iterator q = model[p->first].begin(); q!=model[p->first].end(); ++q)
