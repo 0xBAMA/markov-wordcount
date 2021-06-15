@@ -4,7 +4,10 @@
 #include <string>
 #include <random>
 
-std::map<std::string, std::map<std::string, int>> model;
+#define modeltype std::map<std::string,std::map<std::string,int>> 
+#define modelentry std::map<std::string,int> 
+
+modeltype model;
 std::ifstream in;
 
 void countWords() 
@@ -34,7 +37,7 @@ void spew(int count)
 
     std::string curr;
 
-    for(std::map<std::string, std::map<std::string, int>>::iterator p = model.begin(); p != model.end() && run > 0; ++p, --run)
+    for(modeltype::iterator p = model.begin(); p != model.end() && run > 0; ++p, --run)
     {
         curr = p->first;
     }
@@ -48,7 +51,7 @@ void spew(int count)
         where_to.clear();
 
         std::string temp = curr;
-        for(std::map<std::string,int>::iterator p = model[temp].begin(); p != model[temp].end(); p++)
+        for(modelentry::iterator p = model[temp].begin(); p != model[temp].end(); p++)
             for(int i = 0; i < p->second; i++)
                 where_to.push_back(p->first);
 
@@ -78,7 +81,7 @@ int main(int argc, char** argv)
     countWords();
 
     //report results
-    for(std::map<std::string, std::map<std::string, int>>::iterator p = model.begin(); p != model.end(); ++p)
+    for(modeltype::iterator p = model.begin(); p != model.end(); ++p)
     {
         int total_count = 0;
 
@@ -87,7 +90,7 @@ int main(int argc, char** argv)
         
         std::cout << "\'"<< p->first << "\' has " << total_count << " occurrence(s)." << std::endl;
 
-        for(std::map<std::string, int>::iterator q = model[p->first].begin(); q!=model[p->first].end(); ++q)
+        for(modelentry::iterator q = model[p->first].begin(); q!=model[p->first].end(); ++q)
             std::cout << "  followed by: \'" << q->first << "\' " << q->second << " time(s)." << std::endl; 
     }
 
