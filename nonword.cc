@@ -5,7 +5,10 @@
 #include <random>
 #include <cctype>
 
-std::map< char, std::map< char, int > > model;
+#define modelEntry std::map< char, int >
+#define modelType std::map< char, modelEntry >
+
+modelType model;
 std::ifstream in;
 
 void CountLetters() {
@@ -30,7 +33,7 @@ void Spew( int count ) {
 	run = dis( gen );
 	char curr;
 
-	for ( std::map< char, std::map< char, int > >::iterator p = model.begin(); p != model.end() && run > 0; ++p, --run ) {
+	for ( modelType::iterator p = model.begin(); p != model.end() && run > 0; ++p, --run ) {
 		curr = p->first;
 	}
 
@@ -41,7 +44,7 @@ void Spew( int count ) {
 		std::vector< char > where_to;
 		where_to.clear();
 		char temp = curr;
-		for (std::map< char, int >::iterator p = model[ temp ].begin(); p != model[ temp ].end(); p++ ) {
+		for (modelEntry::iterator p = model[ temp ].begin(); p != model[ temp ].end(); p++ ) {
 			for ( int i = 0; i < p->second; i++ ) {
 				where_to.push_back( p->first );
 			}
@@ -62,13 +65,13 @@ int main( int argc, char** argv ) {
 	if ( !in.is_open() ) return( EXIT_FAILURE );
 	CountLetters(); //stream is good, read it
 
-	for ( std::map< char, std::map< char, int> >::iterator p = model.begin(); p != model.end(); ++p ) { //report results
+	for ( modelType::iterator p = model.begin(); p != model.end(); ++p ) { //report results
 		int total_count = 0;
-		for ( std::map< char, int >::iterator q = model[ p->first ].begin(); q != model[ p->first ].end(); ++q ) {
+		for ( modelEntry::iterator q = model[ p->first ].begin(); q != model[ p->first ].end(); ++q ) {
 			++total_count;
 		}
 		std::cout << "\'" << p->first << "\' has " << total_count << " occurrence(s)." << std::endl;
-		for ( std::map< char, int >::iterator q = model[ p->first ].begin(); q != model[ p->first ].end(); ++q ) {
+		for ( modelEntry::iterator q = model[ p->first ].begin(); q != model[ p->first ].end(); ++q ) {
 			std::cout << "\tfollowed by: \'" << q->first << "\' " << q->second << " time(s)." << std::endl;
 		}
 	}
